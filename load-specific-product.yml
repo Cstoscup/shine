@@ -1,0 +1,19 @@
+config:
+  target: "http://localhost:3002/products/1/related"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: Warm up
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50
+      name: Ramp up load
+    - duration: 600
+      arrivalRate: 1000
+      name: Sustained load
+
+scenarios:
+  - name: "Retrieve data"
+    flow:
+      - get:
+          url: "/"
