@@ -1,9 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import Shipping from './Shipping';
 
-function Cart({checkoutPosition, setCheckoutPosition, total, cart, setCart}) {
+function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, setCart, count, setCount}) {
   const [slide, setSlide] = useState(1);
-  const [render, setRender] = useState(0)
+
+  useEffect(() => {
+    let totalPrice = 0;
+
+    for (var i = 0; i < cart.length; i++) {
+      let itemPrice = cart[i].price * cart[i].quantity;
+      totalPrice = totalPrice + itemPrice;
+    }
+
+    setTotal(totalPrice);
+  }, [count])
 
   const checkoutStyle = {
     transform: `translate(-${checkoutPosition}px, 0)`,
@@ -18,9 +28,12 @@ function Cart({checkoutPosition, setCheckoutPosition, total, cart, setCart}) {
     event.preventDefault();
     let index = event.target.parentElement.id;
     let newCart = cart;
-    newCart[index].quantity++;
-    setCart(newCart);
-    setRender(render + 1);
+    if (newCart[index].quantity !== newCart[index].totalQuantity) {
+      newCart[index].quantity++;
+      setCart(newCart);
+      setCount(count + 1);
+    }
+
   }
 
   function decreaseQuantity(event) {
@@ -32,7 +45,7 @@ function Cart({checkoutPosition, setCheckoutPosition, total, cart, setCart}) {
       newCart.splice(index, 1);
     }
     setCart(newCart);
-    setRender(render - 1);
+    setCount(count - 1);
   }
 
   if (cart.length === 0) {

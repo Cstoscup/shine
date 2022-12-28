@@ -49,6 +49,7 @@ function SelectSku({styleIndex, productInfo, productData, count, setCount, cart,
       style: productData[styleIndex].name,
       size: size,
       quantity: Number(selectedQuantity),
+      totalQuantity: Number(quantity),
       price: productData[styleIndex].sale_price || productData[styleIndex].original_price
     })
   }
