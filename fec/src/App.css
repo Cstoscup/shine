@@ -144,6 +144,11 @@
 
 .fa-circle {
   color: darkgoldenrod;
+  transition: all 150ms ease-in-out;
+}
+
+.fa-stack:hover .fa-circle {
+  color: black;
 }
 
 .thumbnail-left-arrow {
@@ -237,6 +242,11 @@
   border-radius: 4px;
   text-align: center;
   background-color: rgba(184, 135, 11, 0.6);
+  transition: all 150ms ease-in-out;
+}
+
+.add-to-cart-button:hover {
+  background-color: white;
 }
 
 .heading {
@@ -254,6 +264,11 @@
 
 .cart {
   font-size: 40px;
+  transition: all 150ms ease-in-out;
+}
+
+.cart:hover {
+  color: darkgoldenrod;
 }
 
 .cart-with-count {
@@ -321,7 +336,22 @@
 }
 
 .cart-col-quantity {
+  display: flex;
   width: 100px;
+  gap: 5px;
+}
+
+.cart-quantity {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 0 15px;
+}
+
+.cart-quantity-plus, .cart-quantity-minus {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 0 5px;
+  background-color: lightgray;
 }
 
 .total-price {
@@ -338,4 +368,85 @@
   line-height: 30px;
   text-align: center;
   text-transform: uppercase;
+  transition: all 150ms ease-in-out;
+}
+
+.checkout-button:hover {
+  background-color: white;
+}
+
+.billing-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.billing-information {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.billing-information label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.billing-row {
+  display: flex;
+  gap: 20px;
+}
+
+.billing-row label {
+  width: 50%;
+}
+
+.billing-row .address {
+  width: 100%;
+}
+
+.checkout-tracker {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.checkout-tracker .number {
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.checkout-tracker .current {
+  background-color: rgba(184, 135, 11, 0.6);
+}
+
+.checkout-tracker .stage {
+  opacity: 0.5;
+}
+
+.required {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+input[type="text"] {
+  border: 1px solid black;
+  border-radius: 2px;
+  height: 20px;
+  outline: none;
+}
+
+.required-input {
+  display: block;
+  border: 1px solid red !important;
 }

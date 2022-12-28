@@ -163,6 +163,42 @@ const Related = sequelize.define('Related', {
   ]
 })
 
+const Customer = sequelize.define('Customer', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER
+  },
+  first_name: {
+    type: Sequelize.STRING
+  },
+  last_name: {
+    type: Sequelize.STRING
+  },
+  email: {
+    type: Sequelize.STRING
+  },
+  phone_number: {
+    type: Sequelize.STRING
+  },
+  address_1: {
+    type: Sequelize.STRING
+  },
+  address_2: {
+    type: Sequelize.STRING
+  },
+  city: {
+    type: Sequelize.STRING
+  },
+  state: {
+    type: Sequelize.STRING
+  },
+  zip_code: {
+    type: Sequelize.STRING
+  }
+})
+
 sequelize.sync()
   .then(() => {
     console.log('Tables created successfully!');
@@ -171,4 +207,4 @@ sequelize.sync()
     console.log('Unable to create tables.');
   })
 
-module.exports = { Product, Feature, Style, Photo, Sku, Related }
+module.exports = { Product, Feature, Style, Photo, Sku, Related, Customer }

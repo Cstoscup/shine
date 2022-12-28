@@ -1,6 +1,6 @@
 const express = require('express');
 const compression = require('compression')
-const { Product, Feature, Style, Photo, Sku, Related } = require('./database.js');
+const { Product, Feature, Style, Photo, Sku, Related, Customer } = require('./database.js');
 const { Op } = require("sequelize");
 const cors = require('cors')
 
@@ -8,8 +8,27 @@ const cors = require('cors')
 const app = express();
 const port = 3002;
 
-app.use(cors())
-app.use(compression())
+app.use(cors());
+app.use(compression());
+app.use(express.json());
+
+app.post('/customer', (req, res) => {
+  console.log('REQ BODY: ', req.body)
+  Customer.create({
+    first_name: req.body.firstName,
+    last_name: req.body.lastName,
+    email: req.body.email,
+    phone_number: req.body.phoneNumber,
+    address_1: req.body.address1,
+    address_2: req.body.address2,
+    city: req.body.city,
+    state: req.body.state,
+    zip_code: req.body.zipCode
+  })
+    .then((response) => {
+      res.send(response);
+    })
+})
 
 app.get('/products', (req, res) => {
   let page = req.query.page || 1;

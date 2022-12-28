@@ -54,7 +54,7 @@ function App() {
         <Overview currentProduct={currentProduct} count={count} setCount={setCount} cart={cart} setCart={setCart} />
         <RelatedProducts relatedProducts={relatedProducts} currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} left={left} setLeft={setLeft} />
       </div>
-      <Cart checkoutPosition={checkoutPosition} setCheckoutPosition={setCheckoutPosition} total={total} cart={cart} />
+      <Cart checkoutPosition={checkoutPosition} setCheckoutPosition={setCheckoutPosition} total={total} cart={cart} setCart={setCart} />
     </div>
   );
 }
