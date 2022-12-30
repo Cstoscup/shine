@@ -78,7 +78,7 @@ function Overview({currentProduct, count, setCount, cart, setCart}) {
                 })
               }
             </div>
-            <SelectSku styleIndex={styleIndex} productInfo={productInfo} productData={productData} count={count} setCount={setCount} cart={cart} setCart={setCart} />
+            <SelectSku currentProduct={currentProduct} styleIndex={styleIndex} productInfo={productInfo} productData={productData} count={count} setCount={setCount} cart={cart} setCart={setCart} />
           </div>
         </div>
 

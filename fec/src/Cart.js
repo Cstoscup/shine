@@ -3,6 +3,7 @@ import Shipping from './Shipping';
 
 function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, setCart, count, setCount}) {
   const [slide, setSlide] = useState(1);
+  const [shipping, setShipping] = useState(9.99);
 
   useEffect(() => {
     let totalPrice = 0;
@@ -13,6 +14,12 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
     }
 
     setTotal(totalPrice);
+
+    if (totalPrice >= 300) {
+      setShipping(0);
+    } else {
+      setShipping(9.99);
+    }
   }, [count])
 
   const checkoutStyle = {
@@ -31,7 +38,9 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
     if (newCart[index].quantity !== newCart[index].totalQuantity) {
       newCart[index].quantity++;
       setCart(newCart);
+      localStorage.setItem('cart', JSON.stringify(cart));
       setCount(count + 1);
+      localStorage.setItem('count', JSON.stringify(count + 1));
     }
 
   }
@@ -45,7 +54,9 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
       newCart.splice(index, 1);
     }
     setCart(newCart);
+    localStorage.setItem('cart', JSON.stringify(cart));
     setCount(count - 1);
+    localStorage.setItem('count', JSON.stringify(count - 1));
   }
 
   if (cart.length === 0) {
@@ -85,14 +96,14 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
           {
             cart.map((item, index) => {
               return (
-                <div className="cart-row">
+                <div key={index} className="cart-row">
                   <div className="cart-col-product">{item.product}</div>
                   <div className="cart-col-style">{item.style}</div>
                   <div className="cart-col-size">{item.size}</div>
                   <div className="cart-col-quantity" id={index}>
-                    <div className="cart-quantity-minus" onClick={decreaseQuantity}>-</div>
+                    <i class="cart-quantity-minus fa-solid fa-minus" onClick={decreaseQuantity}></i>
                     <div className="cart-quantity">{item.quantity}</div>
-                    <div className="cart-quantity-plus" onClick={increaseQuantity}>+</div>
+                    <i class="cart-quantity-plus fa-solid fa-plus" onClick={increaseQuantity}></i>
                   </div>
                   <div className="cart-col-price">{item.quantity} x ${item.price}.00 = ${item.quantity * item.price}.00</div>
                 </div>
@@ -100,7 +111,18 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
             })
           }
         </div>
-        <div className="total-price">Total: ${total}.00</div>
+        <div className="total-price">
+          <div className="price-breakdown">
+            <div>Subtotal:</div><div>${total}.00</div>
+          </div>
+          <div className="price-breakdown">
+            <div>Shipping:</div>{ shipping > 0 ? <div>${shipping.toFixed(2)}</div> : <div>FREE</div>}
+          </div>
+          <div className="price-breakdown">
+            <div><strong>Total: </strong></div><div><strong>${(total + shipping).toFixed(2)}</strong></div>
+          </div>
+        </div>
+        { total >= 300 ? null : <div className="free-shipping-ad">Add ${(300 - total).toFixed(2)} to your cart for free shipping!</div>}
         <div className="checkout-button" onClick={() => { setSlide(slide + 1) }}>Check Out</div>
       </div>
     )

@@ -355,8 +355,23 @@
 }
 
 .total-price {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 5px;
   text-align: right;
   margin: 20px 0;
+}
+
+.price-breakdown {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+}
+
+.free-shipping-ad {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .checkout-button {

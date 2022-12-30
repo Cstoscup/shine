@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-function SelectSku({styleIndex, productInfo, productData, count, setCount, cart, setCart}) {
+function SelectSku({currentProduct, styleIndex, productInfo, productData, count, setCount, cart, setCart}) {
   const [selectedSize, setSelectedSize] = useState({});
   const [selectedQuantity, setSelectedQuantity] = useState({});
   const [size, setSize] = useState(productData[styleIndex].skus[0].size)
@@ -11,7 +11,7 @@ function SelectSku({styleIndex, productInfo, productData, count, setCount, cart,
     setSelectedSize('SELECT SIZE');
     setSelectedQuantity(1);
     setQuantity(0);
-  }, [styleIndex])
+  }, [styleIndex, currentProduct])
 
   useEffect(() => {
     let quantityArray = []
@@ -43,6 +43,7 @@ function SelectSku({styleIndex, productInfo, productData, count, setCount, cart,
   function addToCart(event) {
     event.preventDefault();
     setCount(count + Number(selectedQuantity));
+    localStorage.setItem('count', JSON.stringify(count + Number(selectedQuantity)));
     let newCart = cart;
     newCart.push({
       product: productInfo.name,
@@ -52,6 +53,7 @@ function SelectSku({styleIndex, productInfo, productData, count, setCount, cart,
       totalQuantity: Number(quantity),
       price: productData[styleIndex].sale_price || productData[styleIndex].original_price
     })
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   return (

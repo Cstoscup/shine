@@ -16,6 +16,12 @@ function App() {
 
   useEffect(() => {
     setLeft(0)
+    if (localStorage.getItem('cart')) {
+      setCart(JSON.parse(localStorage.getItem('cart')));
+    }
+    if (localStorage.getItem('count')) {
+      setCount(JSON.parse(localStorage.getItem('count')));
+    }
     axios.get(`http://localhost:3002/products/${currentProduct}/related`)
       .then((data) => {
         let related = [];

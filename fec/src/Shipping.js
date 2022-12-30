@@ -80,6 +80,8 @@ function Shipping({ slide, setSlide }) {
   }
 
   function saveShippingInfo(event) {
+    let ready = true;
+
     setShippingInfo({
       firstName: firstName,
       lastName: lastName,
@@ -93,39 +95,46 @@ function Shipping({ slide, setSlide }) {
     });
 
     if (firstName === '') {
+      ready = false;
       document.getElementById('first-name').classList.add("required-input");
       document.getElementById('first-name-validation').classList.remove("hidden");
     }
     if (lastName === '') {
+      ready = false;
       document.getElementById('last-name-validation').classList.remove("hidden");
       document.getElementById('last-name').classList.add("required-input");
     }
     if (email === '' || email.indexOf('@') === -1) {
+      ready = false;
       document.getElementById('email-validation').classList.remove("hidden");
       document.getElementById('email').classList.add("required-input");
     }
     if (!validatePhoneNumber(phoneNumber)) {
+      ready = false;
       document.getElementById('phone-number-validation').classList.remove("hidden");
       document.getElementById('phone-number').classList.add("required-input");
     }
     if (address1 === '') {
+      ready = false;
       document.getElementById('address-1').classList.add("required-input");
       document.getElementById('address-1-validation').classList.remove("hidden");
     }
     if (city === '') {
+      ready = false;
       document.getElementById('city').classList.add("required-input");
       document.getElementById('city-validation').classList.remove("hidden");
     }
     if (state === '') {
+      ready = false;
       document.getElementById('state').classList.add("required-input");
       document.getElementById('state-validation').classList.remove("hidden");
     }
     if (zipCode === '') {
+      ready = false;
       document.getElementById('zip-code').classList.add("required-input");
       document.getElementById('zip-code-validation').classList.remove("hidden");
     }
-
-    else {
+    if (ready) {
       axios.post('http://localhost:3002/customer', {
         firstName: firstName,
         lastName: lastName,
