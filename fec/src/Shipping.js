@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
-function Shipping({ slide, setSlide }) {
-  const [shippingInfo, setShippingInfo] = useState({});
+function Shipping({ slide, setSlide, shippingInfo, setShippingInfo }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');

@@ -9,7 +9,8 @@ function Styles({style, styleIndex, setStyleIndex, index, setLeft}) {
 
   if (Number(styleIndex) === index) {
     return (
-      <div>
+      <div className="selected-style">
+        <i className="fa-solid fa-check style-check"></i>
         <img className="style-thumbnail-main" src={style.photos[0].thumbnail_url} alt={style.name} id={index} onClick={changeStyle} />
       </div>
     )

@@ -4,6 +4,7 @@ import Shipping from './Shipping';
 function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, setCart, count, setCount}) {
   const [slide, setSlide] = useState(1);
   const [shipping, setShipping] = useState(9.99);
+  const [shippingInfo, setShippingInfo] = useState({});
 
   useEffect(() => {
     let totalPrice = 0;
@@ -29,6 +30,7 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
 
   function closeCart(event) {
     setCheckoutPosition(0);
+    document.getElementById('checkout-overlay').classList.remove('show-me');
   }
 
   function increaseQuantity(event) {
@@ -138,7 +140,7 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
             <i class="fa-solid fa-x fa-stack-1x fa-inverse"></i>
           </span>
         </div>
-        <Shipping slide={slide} setSlide={setSlide} />
+        <Shipping slide={slide} setSlide={setSlide} shippingInfo={shippingInfo} setShippingInfo={setShippingInfo} />
       </div>
     )
   }
@@ -167,9 +169,48 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
             <div>Review and Place Order</div>
           </div>
         </div>
+
         <div className="billing-buttons">
           <div className="checkout-button" onClick={() => { setSlide(slide - 1) }}>Return to Shipping Details</div>
-          <div className="checkout-button">Continue</div>
+          <div className="checkout-button" onClick={() => { setSlide(slide + 1) }}>Continue</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (slide === 4) {
+    return (
+      <div className="checkout" style={checkoutStyle}>
+        <div className="checkout-heading">
+          <h1>Payment and Billing</h1>
+          <span class="fa-stack fa-2x" onClick={closeCart}>
+            <i class="fa-solid fa-circle fa-stack-2x"></i>
+            <i class="fa-solid fa-x fa-stack-1x fa-inverse"></i>
+          </span>
+        </div>
+        <div className="checkout-tracker">
+          <div className="stage">
+            <div className="number"><i class="fa-solid fa-check"></i></div>
+            <div>Shipping Details</div>
+          </div>
+          <div className="stage">
+            <div className="number">2</div>
+            <div>Payment and Billing</div>
+          </div>
+          <div>
+            <div className="number current">3</div>
+            <div>Review and Place Order</div>
+          </div>
+        </div>
+        <div>Ship to: </div>
+        <div className="ship-to-address">
+          <div>{shippingInfo.firstName} {shippingInfo.lastName}</div>
+          <div>{shippingInfo.address1} {shippingInfo.address2}</div>
+          <div>{shippingInfo.city}, {shippingInfo.state} {shippingInfo.zipCode}</div>
+        </div>
+        <div className="billing-buttons">
+          <div className="checkout-button" onClick={() => { setSlide(slide - 1) }}>Return to Payment and Billing</div>
+          <div className="checkout-button" onClick={() => { setSlide(slide + 1) }}>Place Order</div>
         </div>
       </div>
     )

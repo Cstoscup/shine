@@ -1,3 +1,8 @@
+body, select {
+  font-family: 'Nunito', sans-serif;
+  color: #284B6C;
+}
+
 .overview {
   display: flex;
   flex-direction: row;
@@ -11,8 +16,9 @@
   width: 650px;
   height: 650px;
   object-fit: cover;
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .overview-right-side {
@@ -26,13 +32,15 @@
   width: 1078px;
   overflow: hidden;
   margin: 0 auto;
+  height: 370px;
+  align-items: center;
 }
 
 .related-product img {
   width: 250px;
   height: 250px;
   object-fit: cover;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #0D2C49;
   border-radius: 4px 4px 0 0;
 }
 
@@ -40,8 +48,9 @@
   display: flex;
   flex-direction: column;
   height: 350px;
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .related-product-information {
@@ -67,16 +76,17 @@
   height: 75px;
   width: 75px;
   object-fit: cover;
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 50%;
   filter: grayscale(100%);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .style-thumbnail-main {
   height: 75px;
   width: 75px;
   object-fit: cover;
-  border: 2px solid darkgoldenrod;
+  border: 2px solid #0D2C49;
   border-radius: 50%;
 }
 
@@ -112,7 +122,7 @@
   height: 75px;
   width: 75px;
   object-fit: cover;
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 4px;
 }
 
@@ -143,12 +153,12 @@
 }
 
 .fa-circle {
-  color: darkgoldenrod;
+  color: #284B6C;
   transition: all 150ms ease-in-out;
 }
 
 .fa-stack:hover .fa-circle {
-  color: black;
+  color: #CCCFC8;
 }
 
 .thumbnail-left-arrow {
@@ -191,6 +201,22 @@
   width: 400px;
 }
 
+.selected-style {
+  position: relative;
+}
+
+.style-check {
+  position: absolute;
+  right: 0;
+  background-color: white;
+  border: 1px solid #0D2C49;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+}
+
 .product-lower-section {
   display: flex;
   width: 1078px;
@@ -198,7 +224,7 @@
 }
 
 .product-features {
-  border-left: 2px solid black;
+  border-left: 2px solid #0D2C49;
   width: 25%;
   font-size: 20px;
   padding-left: 20px;
@@ -223,13 +249,13 @@
 
 .select-size {
   width: 75%;
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 4px;
 }
 
 .select-quantity {
   width: 25%;
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 4px;
 }
 
@@ -238,10 +264,10 @@
   line-height: 48px;
   font-size: 20px;
   text-transform: uppercase;
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 4px;
   text-align: center;
-  background-color: rgba(184, 135, 11, 0.6);
+  background-color: #CCCFC8;
   transition: all 150ms ease-in-out;
 }
 
@@ -260,6 +286,9 @@
   font-size: 48px;
   text-transform: uppercase;
   letter-spacing: 1.25px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 1000;
+  font-style: italic;
 }
 
 .cart {
@@ -268,7 +297,7 @@
 }
 
 .cart:hover {
-  color: darkgoldenrod;
+  color: #CCCFC8;
 }
 
 .cart-with-count {
@@ -276,7 +305,7 @@
 }
 
 .cart-count {
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -290,13 +319,34 @@
 .checkout {
   position: fixed;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 4px;
   width: 760px;
   height: 100%;
   top: 0;
   right: -802px;
   padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 102;
+}
+
+.checkout-overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background: rgba(49,49,49,0.8);
+  z-index: -1;
+  opacity: 0;
+  transition: all 1000ms ease-in-out;
+}
+
+.show-me {
+  z-index: 101;
+  opacity: 1;
 }
 
 .checkout-heading {
@@ -310,7 +360,7 @@
   flex-direction: column;
   gap: 10px;
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 4px;
 }
 
@@ -320,7 +370,7 @@
 }
 
 .cart-heading-row {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #0D2C49;
 }
 
 .cart-col-product {
@@ -342,16 +392,17 @@
 }
 
 .cart-quantity {
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 4px;
   padding: 0 15px;
 }
 
 .cart-quantity-plus, .cart-quantity-minus {
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 4px;
   padding: 0 5px;
   background-color: lightgray;
+  line-height: 1.25;
 }
 
 .total-price {
@@ -375,9 +426,9 @@
 }
 
 .checkout-button {
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 4px;
-  background-color: rgba(184, 135, 11, 0.6);
+  background-color: #CCCFC8;
   width: 100%;
   height: 30px;
   line-height: 30px;
@@ -429,7 +480,7 @@
 }
 
 .checkout-tracker .number {
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 50%;
   height: 50px;
   width: 50px;
@@ -439,7 +490,7 @@
 }
 
 .checkout-tracker .current {
-  background-color: rgba(184, 135, 11, 0.6);
+  background-color: #CCCFC8;
 }
 
 .checkout-tracker .stage {
@@ -455,7 +506,7 @@
 }
 
 input[type="text"] {
-  border: 1px solid black;
+  border: 1px solid #0D2C49;
   border-radius: 2px;
   height: 20px;
   outline: none;
@@ -464,4 +515,25 @@ input[type="text"] {
 .required-input {
   display: block;
   border: 1px solid red !important;
+}
+
+.ship-to-address {
+  border: 1px solid #0D2C49;
+  border-radius: 4px;
+  width: fit-content;
+  padding: 20px;
+  line-height: 24px;
+  margin: 20px 0;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.category-photo {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border: 1px solid #0D2C49;
 }
