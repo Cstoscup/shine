@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import Shipping from './Shipping';
+import Payment from './Payment';
+import axios from 'axios';
 
-function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, setCart, count, setCount}) {
+function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, setCart, count, setCount, currentProduct, setCurrentProduct}) {
   const [slide, setSlide] = useState(1);
   const [shipping, setShipping] = useState(9.99);
   const [shippingInfo, setShippingInfo] = useState({});
+
+  console.log(cart);
 
   useEffect(() => {
     let totalPrice = 0;
@@ -59,6 +63,21 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
     localStorage.setItem('cart', JSON.stringify(cart));
     setCount(count - 1);
     localStorage.setItem('count', JSON.stringify(count - 1));
+  }
+
+  function placeOrder(event) {
+    event.preventDefault();
+    cart.forEach((item) => {
+      axios.post('http://localhost:3002/skus', {style_id: item.styleId, size: item.size, quantity: item.quantity})
+        .then((response) => {
+          console.log(response);
+        })
+    })
+    setCart([]);
+    setCount(0);
+    setCurrentProduct(null);
+    localStorage.setItem('cart', JSON.stringify([]));
+    localStorage.setItem('count', JSON.stringify(0));
   }
 
   if (cart.length === 0) {
@@ -155,25 +174,7 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
             <i class="fa-solid fa-x fa-stack-1x fa-inverse"></i>
           </span>
         </div>
-        <div className="checkout-tracker">
-          <div className="stage">
-            <div className="number"><i class="fa-solid fa-check"></i></div>
-            <div>Shipping Details</div>
-          </div>
-          <div>
-            <div className="number current">2</div>
-            <div>Payment and Billing</div>
-          </div>
-          <div className="stage">
-            <div className="number">3</div>
-            <div>Review and Place Order</div>
-          </div>
-        </div>
-
-        <div className="billing-buttons">
-          <div className="checkout-button" onClick={() => { setSlide(slide - 1) }}>Return to Shipping Details</div>
-          <div className="checkout-button" onClick={() => { setSlide(slide + 1) }}>Continue</div>
-        </div>
+        <Payment slide={slide} setSlide={setSlide} />
       </div>
     )
   }
@@ -210,7 +211,7 @@ function Cart({checkoutPosition, setCheckoutPosition, total, setTotal, cart, set
         </div>
         <div className="billing-buttons">
           <div className="checkout-button" onClick={() => { setSlide(slide - 1) }}>Return to Payment and Billing</div>
-          <div className="checkout-button" onClick={() => { setSlide(slide + 1) }}>Place Order</div>
+          <div className="checkout-button" onClick={placeOrder}>Place Order</div>
         </div>
       </div>
     )

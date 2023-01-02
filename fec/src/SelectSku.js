@@ -48,6 +48,7 @@ function SelectSku({currentProduct, styleIndex, productInfo, productData, count,
     newCart.push({
       product: productInfo.name,
       style: productData[styleIndex].name,
+      styleId: productData[styleIndex].style_id,
       size: size,
       quantity: Number(selectedQuantity),
       totalQuantity: Number(quantity),

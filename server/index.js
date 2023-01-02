@@ -30,6 +30,14 @@ app.post('/customer', (req, res) => {
     })
 })
 
+app.post('/skus', (req, res) => {
+  console.log(req.body);
+  Sku.decrement({ quantity: req.body.quantity }, { where: { [Op.and] : [{ StyleId: req.body.style_id }, { size: req.body.size }] }})
+    .then((response) => {
+      res.send(response);
+    })
+})
+
 app.get('/products', (req, res) => {
   let page = req.query.page || 1;
   let count = req.query.count || 5;

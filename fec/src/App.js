@@ -3,13 +3,22 @@ import axios from 'axios';
 import './App.css';
 import Cart from './Cart';
 import ProductDetails from './ProductDetails';
+import ProductCard from './ProductCard';
 
 function App() {
-  const [currentProduct, setCurrentProduct] = useState(3);
+  const [currentProduct, setCurrentProduct] = useState(null);
   const [count, setCount] = useState(0);
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [checkoutPosition, setCheckoutPosition] = useState(0);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3002/products?count=10')
+      .then((results) => {
+        setProducts(results.data);
+      })
+  }, [])
 
   function viewCart(event) {
     document.getElementById('checkout-overlay').classList.add('show-me');
@@ -32,8 +41,20 @@ function App() {
           <i className="cart fa-solid fa-cart-shopping"></i>
         </div>
       </div>
-      <ProductDetails currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} count={count} setCount={setCount} cart={cart} setCart={setCart} />
-      <Cart checkoutPosition={checkoutPosition} setCheckoutPosition={setCheckoutPosition} total={total} setTotal={setTotal} cart={cart} setCart={setCart} count={count} setCount={setCount} />
+      { currentProduct ? null :
+        <div className="all-products">
+          {
+            products.map((product, index) => {
+              return (
+                <ProductCard product={product} setCurrentProduct={setCurrentProduct} />
+              )
+            })
+          }
+        </div>
+
+      }
+      { currentProduct ? <ProductDetails currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} count={count} setCount={setCount} cart={cart} setCart={setCart} /> : null }
+      <Cart checkoutPosition={checkoutPosition} setCheckoutPosition={setCheckoutPosition} total={total} setTotal={setTotal} cart={cart} setCart={setCart} count={count} setCount={setCount} currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />
       <div className="checkout-overlay" id="checkout-overlay"></div>
     </div>
 );

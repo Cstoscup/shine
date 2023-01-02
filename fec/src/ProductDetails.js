@@ -3,7 +3,7 @@ import axios from 'axios';
 import Overview from './Overview';
 import RelatedProducts from './RelatedProducts';
 
-function ProductDetails({currentProduct, setCurrentProduct, count, setCount, cart, setCart}) {
+function ProductDetails({currentProduct, setCurrentProduct, count, setCount, cart, setCart, purchaseComplete}) {
   const [left, setLeft] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([])
 
