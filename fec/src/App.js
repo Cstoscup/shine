@@ -14,7 +14,7 @@ function App() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3002/products?count=10')
+    axios.get('http://localhost:3002/products?count=9')
       .then((results) => {
         setProducts(results.data);
       })

@@ -543,5 +543,6 @@ input[type="text"] {
   flex-wrap: wrap;
   width: 1078px;
   margin: 0 auto;
-  gap: 10px;
+  gap: 30px;
+  justify-content: center;
 }
