@@ -15,7 +15,7 @@ function ProductDetails({currentProduct, setCurrentProduct, count, setCount, car
     if (localStorage.getItem('count')) {
       setCount(JSON.parse(localStorage.getItem('count')));
     }
-    axios.get(`http://localhost:3002/products/${currentProduct}/related`)
+    axios.get(`http://ec2-3-129-229-2.us-east-2.compute.amazonaws.com/products/${currentProduct}/related`)
       .then((data) => {
         let related = [];
         for (var i = 0; i < data.data.length; i++) {

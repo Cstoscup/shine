@@ -16,14 +16,14 @@ function Overview({currentProduct, count, setCount, cart, setCart}) {
     setPhotoIndex(0);
     setStyleIndex(0);
     setLeft(0);
-    axios.get(`http://localhost:3002/products/${currentProduct}`)
+    axios.get(`http://ec2-3-129-229-2.us-east-2.compute.amazonaws.com/products/${currentProduct}`)
       .then((data) => {
-        setProductInfo(data.data);
+        setProductInfo(data.data[0]);
       })
   }, [currentProduct])
 
   useEffect(() => {
-    axios.get(`http://localhost:3002/products/${currentProduct}/styles`)
+    axios.get(`http://ec2-3-129-229-2.us-east-2.compute.amazonaws.com/products/${currentProduct}/styles`)
       .then((data) => {
         setProductData(data.data.results);
       })

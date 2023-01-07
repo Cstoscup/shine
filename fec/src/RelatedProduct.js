@@ -11,14 +11,14 @@ function RelatedProduct({product, currentProduct, setCurrentProduct, left}) {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:3002/products/${product}`)
+    axios.get(`http://ec2-3-129-229-2.us-east-2.compute.amazonaws.com/products/${product}`)
       .then((data) => {
-        setProductInfo(data.data)
+        setProductInfo(data.data[0])
       })
   }, [currentProduct])
 
   useEffect(() => {
-    axios.get(`http://localhost:3002/products/${product}/styles`)
+    axios.get(`http://ec2-3-129-229-2.us-east-2.compute.amazonaws.com/products/${product}/styles`)
       .then((data) => {
         setProductData(data.data.results[0])
       })

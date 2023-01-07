@@ -6,14 +6,14 @@ function ProductCard({product, setCurrentProduct}) {
   const [productData, setProductData] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3002/products/${product.id}`)
+    axios.get(`http://ec2-3-129-229-2.us-east-2.compute.amazonaws.com/products/${product.id}`)
       .then((data) => {
-        setProductInfo(data.data)
+        setProductInfo(data.data[0])
       })
   }, [])
 
   useEffect(() => {
-    axios.get(`http://localhost:3002/products/${product.id}/styles`)
+    axios.get(`http://ec2-3-129-229-2.us-east-2.compute.amazonaws.com/products/${product.id}/styles`)
       .then((data) => {
         setProductData(data.data.results[0])
       })
